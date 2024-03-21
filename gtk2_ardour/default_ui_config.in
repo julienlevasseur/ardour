@@ -18,6 +18,7 @@
     <Option name="show-track-meters" value="1"/>
     <Option name="default-narrow_ms" value="0"/>
     <Option name="font-scale" value="102400"/>
+    <Option name="strip-width" value="110"/>
   </UI>
   <Canvas>
     <Option name="small font" value="@FONT_SMALL@"/>

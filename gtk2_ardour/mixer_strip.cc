@@ -106,6 +106,7 @@ MixerStrip* MixerStrip::_entered_mixer_strip;
 PBD::Signal1<void,MixerStrip*> MixerStrip::CatchDeletion;
 
 #define PX_SCALE(px) std::max((float)px, rintf((float)px * UIConfiguration::instance().get_ui_scale()))
+#define STRIP_WIDTH = UIConfiguration::instance().get_strip_width()
 
 MixerStrip::MixerStrip (Mixer_UI& mx, Session* sess, bool in_mixer)
 	: SessionHandlePtr (sess)
@@ -860,7 +861,8 @@ MixerStrip::set_width_enum (Width w, void* owner)
 
 		{
 			// panners expect an even number of horiz. pixels
-			int width = rintf (max (110.f * scale, gpm.get_gm_width() + 10.f * scale)) + 1;
+			// int width = rintf (max (110.f * scale, gpm.get_gm_width() + 10.f * scale)) + 1;
+			int width = rintf (max (STRIP_WIDTH.f * scale, gpm.get_gm_width() + 10.f * scale)) + 1;
 			width &= ~1;
 			set_size_request (width, -1);
 		}

@@ -1142,6 +1142,25 @@ class FontScalingOptions : public HSliderOption
 	}
 };
 
+// This could maybe be better located in the Mixer appearance
+class MixerStripWidthOptions : public HSliderOption
+{
+	public:
+	MixerStripWidthOptions ()
+		: HSliderOption ("strip-width", _("Mixer Strip wide width"),
+			sigc::mem_fun (UIConfiguration::instance(), &UIConfiguration::get_strip_width),
+			sigc::mem_fun (UIConfiguration::instance(), &UIConfiguration::set_strip_width),
+			80, 250, 1, 5,
+			1, false
+		)
+
+		_hscale.set_name("MixerStripWidthSlider");
+		_hscale.set_draw_value(false);
+
+		Gtkmm2ext::UI::instance()->set_tip(_hscale,
+			 _("Specify the default width for Mixer Strips for wide display."));
+};
+
 class PluginScanTimeOutSliderOption : public HSliderOption
 {
 public:
@@ -2885,6 +2904,8 @@ RCOptionEditor::RCOptionEditor ()
 	mic->add (64,  _("64 parameters"));
 	mic->add (128, _("128 parameters"));
 	add_option (_("Appearance/Mixer"), mic);
+
+	add_option (_("Appearance/Mixer"), new MixerStripWidthOptions ());
 
 	add_option (_("Appearance/Mixer"), new OptionEditorBlank ());
 
